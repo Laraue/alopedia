@@ -1,4 +1,4 @@
-# Алопедия (working name)
+# Алопедия (alopedia.org)
 
 Prototype of a Russian-language content site about alopecia (Boards: ALO-12). Nuxt SSR, no
 backend: articles are markdown files in `layers/content/content`. See ARCHITECTURE.md.
@@ -11,5 +11,5 @@ pnpm typecheck
 pnpm build        # production build in .output
 ```
 
-Production: set `NUXT_PUBLIC_SITE_URL` (e.g. `https://alopedia.org`) for canonical URLs, the sitemap
-and robots.txt.
+Canonical URLs, the sitemap and robots.txt use `https://alopedia.org`; override it with
+`NUXT_PUBLIC_SITE_URL` (e.g. for a staging host).

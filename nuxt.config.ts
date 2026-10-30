@@ -3,8 +3,8 @@ import { defineNuxtConfig } from 'nuxt/config'
 import { siteName } from './layers/core/app/constants/site'
 
 // Public origin of the site (override with NUXT_PUBLIC_SITE_URL): canonical and sitemap URLs are
-// built from it. The domain is not chosen yet (ALO-8).
-const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+// built from it.
+const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || 'https://alopedia.org'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // Host config. The areas are Nuxt layers in `layers/` (core, content), registered automatically.
