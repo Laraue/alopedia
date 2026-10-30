@@ -43,10 +43,11 @@ jobs:
           retention-days: 7
 
   # The same path as laraue-boards: the build goes to /home/laraue/alopedia on the server, and the
-  # `alopedia` service of Laraue.Apps.Infra copies it into its image.
+  # `alopedia` service of Laraue.Apps.Infra copies it into its image. Runs only once the repository
+  # variable DEPLOY_ENABLED is "true", that is after the server side (DNS, certificate, infra) is ready.
   deploy:
     needs: build
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && vars.DEPLOY_ENABLED == 'true'
     runs-on: ubuntu-latest
     environment: alopedia-production
     steps:
