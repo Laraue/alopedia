@@ -6,7 +6,7 @@ const kinds: Record<string, ContentKind> = {
   section: 'section',
 }
 
-// Section folders are English, article slugs Russian transliteration: both lowercase latin.
+// Section folders and article slugs are English: lowercase latin words joined by "-".
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 
 const text = (value: string | string[] | undefined, key: string, file: string): string => {
@@ -17,7 +17,7 @@ const text = (value: string | string[] | undefined, key: string, file: string): 
   return value
 }
 
-// `file` is a path inside the content folder: `types/index.md` or `types/gnezdnaya.md`.
+// `file` is a path inside the content folder: `types/index.md` or `types/alopecia-areata.md`.
 export const parseContentEntry = (file: string, raw: string): ContentEntry => {
   const segments = file.replace(/\.md$/, '').split('/')
   if (segments.length !== 2) {

@@ -17,10 +17,10 @@ const article = (title: string, order = 0) =>
 
 describe('parseContentEntry', () => {
   it('reads an article and its section from the path', () => {
-    const entry = parseContentEntry('types/gnezdnaya.md', article('Гнездная'))
+    const entry = parseContentEntry('types/alopecia-areata.md', article('Гнездная'))
 
     expect(entry.section).toBe('types')
-    expect(entry.slug).toBe('gnezdnaya')
+    expect(entry.slug).toBe('alopecia-areata')
     expect(entry.meta.kind).toBe('article')
   })
 
@@ -40,7 +40,7 @@ describe('parseContentEntry', () => {
 describe('createContentCatalog', () => {
   const catalog = createContentCatalog({
     'treatments/index.md': section('Лечение', 2),
-    'treatments/minoksidil.md': article('Миноксидил', 1),
+    'treatments/minoxidil.md': article('Миноксидил', 1),
     'types/b.md': article('Б', 2),
     'types/a.md': article('А', 1),
     'types/c.md': article('В', 3),
@@ -70,7 +70,7 @@ describe('createContentCatalog', () => {
       '/types/b',
       '/types/c',
       '/treatments',
-      '/treatments/minoksidil',
+      '/treatments/minoxidil',
     ])
   })
 

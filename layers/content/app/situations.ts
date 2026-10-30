@@ -7,10 +7,10 @@ export type Situation = {
 
 // The home page starts from what is happening, not from a diagnosis: people search for symptoms.
 export const situations: Situation[] = [
-  { title: 'Появились круглые очаги без волос', to: '/types/gnezdnaya' },
-  { title: 'Редеют волосы на макушке или у висков', to: '/types/androgennaya' },
-  { title: 'Волосы сыпятся после родов, болезни или стресса', to: '/types/telogenovoe-vypadenie' },
-  { title: 'Выпали все волосы на голове', to: '/types/totalnaya' },
+  { title: 'Появились круглые очаги без волос', to: '/types/alopecia-areata' },
+  { title: 'Редеют волосы на макушке или у висков', to: '/types/androgenetic-alopecia' },
+  { title: 'Волосы сыпятся после родов, болезни или стресса', to: '/types/telogen-effluvium' },
+  { title: 'Выпали все волосы на голове', to: '/types/alopecia-totalis' },
   { title: 'Алопеция у ребёнка', to: '/kids' },
-  { title: 'Ищу парик или систему волос', to: '/life/pariki' },
+  { title: 'Ищу парик или систему волос', to: '/life/wigs' },
 ]

@@ -19,7 +19,7 @@ export const useContentCatalog = (): Promise<ContentCatalog> => {
         continue
       }
       const raw = await storage.getItemRaw(key)
-      // Storage keys look like `types:gnezdnaya.md`.
+      // Storage keys look like `types:alopecia-areata.md`.
       files[key.replaceAll(':', '/')] =
         raw instanceof Uint8Array ? new TextDecoder().decode(raw) : String(raw)
     }

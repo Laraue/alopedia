@@ -41,7 +41,8 @@ parameters, create the deps and pass them to a page component.
 - Sections are English folders: `/types`, `/women`, `/treatments`, `/life`, `/kids`, `/glossary`,
   `/about`. A section listed in `core/app/public-shell/navigation.ts` must have a folder in
   `content/content`.
-- Articles are Russian transliteration: `/types/gnezdnaya`, `/treatments/minoksidil`.
+- Articles are English too: `/types/alopecia-areata`, `/treatments/minoxidil`. The same path can
+  then serve every language later (`/en/types/alopecia-areata`).
 - No trailing slash (Nuxt's default); canonical URLs come from nuxt-seo-utils.
 - Everything a visitor sees is in Russian.
 
@@ -62,7 +63,7 @@ updatedAt: 2026-10-31
 ---
 ```
 
-Internal links are absolute paths (`/types/gnezdnaya`); a test checks they point to existing pages.
+Internal links are absolute paths (`/types/alopecia-areata`); a test checks they point to existing pages.
 Links to other sites open in a new tab with `nofollow`. Every medical article ends with sources.
 
 ## SEO
