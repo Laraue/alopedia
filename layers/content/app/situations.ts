@@ -9,8 +9,8 @@ export type Situation = {
 export const situations: Situation[] = [
   { title: 'Появились круглые очаги без волос', to: '/types/gnezdnaya' },
   { title: 'Редеют волосы на макушке или у висков', to: '/types/androgennaya' },
-  { title: 'Волосы сыпятся после родов, болезни или стресса', to: '/women/vypadenie-volos-u-zhenshchin' },
-  { title: 'Выпали все волосы на голове', to: '/types/gnezdnaya' },
+  { title: 'Волосы сыпятся после родов, болезни или стресса', to: '/types/telogenovoe-vypadenie' },
+  { title: 'Выпали все волосы на голове', to: '/types/totalnaya' },
   { title: 'Алопеция у ребёнка', to: '/kids' },
   { title: 'Ищу парик или систему волос', to: '/life/pariki' },
 ]
