@@ -1,0 +1,123 @@
+:root {
+  color-scheme: light;
+
+  /* Primitives: raw ramps, never used by components directly. Ordered from the background end (1)
+     to the text end (12); step 9 of a hue is its solid fill. A warm neutral and a calm teal keep the
+     site away from both clinic blue and beauty pink. */
+  --sand-1: #fdfcfa;
+  --sand-2: #f8f6f2;
+  --sand-3: #f2efe9;
+  --sand-4: #ebe7df;
+  --sand-5: #e2ddd3;
+  --sand-7: #cbc4b7;
+  --sand-9: #958d80;
+  --sand-11: #645d52;
+  --sand-12: #27241f;
+  --teal-2: #e9f4f2;
+  --teal-3: #d6ebe7;
+  --teal-9: #23786b;
+  --teal-10: #1d685d;
+  --teal-11: #1a5c52;
+  --amber-3: #fbf0dc;
+  --amber-11: #7d5512;
+  --white: #fff;
+
+  /* Semantic roles: what components use. Only this layer is remapped between themes. */
+  --color-background: var(--sand-1);
+  --color-surface: var(--white);
+  --color-soft: var(--sand-3);
+  /* Page zones, top to bottom, each a different tone so neighbours never merge: the teal hero, the
+     plain page, a sand band, the dark footer. */
+  --color-hero: var(--teal-2);
+  --color-band: var(--sand-3);
+  --color-footer: var(--sand-12);
+  --color-footer-text: var(--sand-3);
+  --color-footer-muted: var(--sand-9);
+  --color-footer-divider: color-mix(in srgb, var(--sand-1) 14%, transparent);
+  --color-divider: var(--sand-5);
+  --color-border: var(--sand-5);
+  --color-border-strong: var(--sand-7);
+  --color-text: var(--sand-12);
+  --color-muted: var(--sand-11);
+  --color-faint: var(--sand-9);
+  --color-accent: var(--teal-9);
+  --color-accent-hover: var(--teal-10);
+  --color-accent-soft: var(--teal-2);
+  --color-accent-text: var(--teal-11);
+  --color-on-accent: var(--white);
+  --color-focus: var(--teal-9);
+  --color-notice: var(--amber-11);
+  --color-notice-soft: var(--amber-3);
+
+  /* Sizes are in rem, so text and spacing grow together when the user raises the browser's font
+     size. The px values are at the default 16px. */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-8: 2rem; /* 32px */
+  --space-10: 2.5rem; /* 40px */
+  --space-12: 3rem; /* 48px */
+  --space-16: 4rem; /* 64px */
+
+  --radius-small: 0.375rem; /* 6px */
+  --radius: 0.625rem; /* 10px */
+  --radius-card: 1rem; /* 16px */
+  --radius-full: 999px;
+
+  --font-size-sm: 0.8125rem; /* 13px */
+  --font-size-md: 0.9375rem; /* 15px */
+  --font-size-lg: 1.0625rem; /* 17px: article body */
+  --font-size-xl: 1.25rem; /* 20px */
+  --font-size-2xl: 1.5rem; /* 24px */
+  --font-size-3xl: 2rem; /* 32px */
+  --font-size-4xl: 2.75rem; /* 44px */
+  --line-height-body: 1.6;
+  --line-height-article: 1.75;
+  --line-height-heading: 1.2;
+  /* System fonts: Cyrillic everywhere, nothing to download. */
+  --font-family-sans:
+    system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --page-max-width: 72rem; /* 1152px */
+  --article-max-width: 44rem; /* 704px: a comfortable line for long reading */
+  --header-height: 4rem;
+
+  --shadow-card: 0 1px 2px #27241f0d, 0 4px 16px #27241f0a;
+  --duration-fast: 120ms;
+}
+
+/* The dark theme follows the system setting. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --sand-1: #191816;
+    --sand-2: #1f1e1b;
+    --sand-3: #262420;
+    --sand-4: #2d2b27;
+    --sand-5: #37342f;
+    --sand-7: #4a463f;
+    --sand-9: #8a8377;
+    --sand-11: #b4ada1;
+    --sand-12: #eeebe5;
+    --teal-2: #142824;
+    --teal-3: #1a3530;
+    --teal-9: #3fa595;
+    --teal-10: #52b5a5;
+    --teal-11: #7fcabd;
+    --amber-3: #3a2e1a;
+    --amber-11: #dcae63;
+
+    --color-surface: var(--sand-2);
+    --color-on-accent: #0f1f1c;
+    /* In the dark the footer sinks below the page instead of inverting. */
+    --color-footer: #11100e;
+    --color-footer-text: var(--sand-12);
+    --color-footer-muted: var(--sand-9);
+  }
+}
