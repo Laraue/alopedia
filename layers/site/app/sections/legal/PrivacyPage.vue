@@ -11,8 +11,9 @@
 
       <h2>Кто обрабатывает данные</h2>
       <p>
-        Оператор персональных данных — {{ operatorName }}. По всем вопросам об обработке данных пишите
-        на {{ contactEmail }}.
+        Персональные данные обрабатывает владелец сайта alopedia.org (далее — «мы»). По всем вопросам
+        об обработке данных пишите на
+        <a :href="`mailto:${contactEmail}`">{{ contactEmail }}</a>.
       </p>
 
       <h2>Какие данные мы собираем</h2>
@@ -84,7 +85,8 @@
       <h2>Ваши права</h2>
       <p>
         Вы можете отозвать согласие, узнать, какие данные о вас обрабатываются, и потребовать их
-        удаления. Напишите на {{ contactEmail }} — мы ответим в течение 10 рабочих дней.
+        удаления. Напишите на <a :href="`mailto:${contactEmail}`">{{ contactEmail }}</a> — мы ответим
+        в течение 10 рабочих дней.
       </p>
 
       <h2>Изменения</h2>
@@ -99,12 +101,7 @@
 <script setup lang="ts">
 import { useSeoMeta } from '#app'
 import { clearAnalyticsConsent } from '#layers/core/app/analytics/analyticsConsent'
-import {
-  contactEmail,
-  operatorName,
-  privacyPolicyDate,
-  siteName,
-} from '#layers/core/app/constants/site'
+import { contactEmail, privacyPolicyDate, siteName } from '#layers/core/app/constants/site'
 
 // A calendar day, shown as written in any timezone.
 const date = new Intl.DateTimeFormat('ru-RU', { dateStyle: 'long', timeZone: 'UTC' }).format(

@@ -15,7 +15,7 @@ layers/
       ui/styles/                 Design tokens (light and dark) and base styles.
       ui/components/             Shared UI, e.g. the medical disclaimer.
       public-shell/              Header, footer and their navigation.
-      constants/                 Site name, tagline, the privacy policy's operator and contact.
+      constants/                 Site name, tagline, the privacy policy's contact and date.
       analytics/                 Yandex Metrica and the cookie consent (notice, stored answer).
   content/                       Home, section and article pages.
     app/
