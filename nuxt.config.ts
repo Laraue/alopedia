@@ -39,7 +39,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       // The Yandex Metrica counter (NUXT_PUBLIC_YANDEX_METRICA_ID); empty turns analytics off.
-      yandexMetricaId: '',
+      yandexMetricaId: '113946576',
     },
   },
 
