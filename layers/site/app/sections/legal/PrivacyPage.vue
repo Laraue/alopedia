@@ -21,7 +21,7 @@
         На сайте нет регистрации и форм: мы не просим вас указывать имя, телефон, адрес электронной
         почты или сведения о здоровье.
       </p>
-      <p>Если вы согласились на сбор статистики, сервис Яндекс Метрика получает:</p>
+      <p>При посещении сайта сервис Яндекс Метрика получает:</p>
       <ul>
         <li>cookie-файлы с обезличенным идентификатором браузера;</li>
         <li>IP-адрес и приблизительное местоположение по нему;</li>
@@ -46,8 +46,8 @@
 
       <h2>На каком основании</h2>
       <p>
-        Статистика собирается только с вашего согласия, которое вы даёте кнопкой «Принять» в
-        уведомлении о cookie. Если вы нажали «Отказаться», Яндекс Метрика не загружается.
+        Ваше согласие на использование cookie и сбор статистики, которое вы даёте, продолжая
+        пользоваться сайтом после уведомления о cookie. Отозвать его можно способами из раздела ниже.
       </p>
 
       <h2>Кому передаются данные</h2>
@@ -63,7 +63,6 @@
 
       <h2>Как управлять cookie</h2>
       <ul>
-        <li>изменить своё решение можно кнопкой ниже — уведомление появится снова;</li>
         <li>удалить cookie и запретить их можно в настройках браузера;</li>
         <li>
           отключить Яндекс Метрику на всех сайтах можно
@@ -75,12 +74,6 @@
           >.
         </li>
       </ul>
-      <button
-        class="reset"
-        type="button"
-        @click="resetConsent">
-        Изменить решение о cookie
-      </button>
 
       <h2>Ваши права</h2>
       <p>
@@ -100,19 +93,12 @@
 
 <script setup lang="ts">
 import { useSeoMeta } from '#app'
-import { clearAnalyticsConsent } from '#layers/core/app/analytics/analyticsConsent'
 import { contactEmail, privacyPolicyDate, siteName } from '#layers/core/app/constants/site'
 
 // A calendar day, shown as written in any timezone.
 const date = new Intl.DateTimeFormat('ru-RU', { dateStyle: 'long', timeZone: 'UTC' }).format(
   new Date(privacyPolicyDate),
 )
-
-// Forgets the answer and reloads, so the notice asks again (and an accepted counter stops loading).
-const resetConsent = (): void => {
-  clearAnalyticsConsent()
-  window.location.reload()
-}
 
 useSeoMeta({
   description: `Какие данные собирает сайт ${siteName}, зачем и как управлять cookie.`,
@@ -166,17 +152,4 @@ useSeoMeta({
   text-underline-offset: 3px;
 }
 
-.reset {
-  background: transparent;
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-full);
-  color: var(--color-text);
-  cursor: pointer;
-  font-weight: var(--font-weight-semibold);
-  padding: var(--space-2) var(--space-5);
-}
-
-.reset:hover {
-  background: var(--color-soft);
-}
 </style>

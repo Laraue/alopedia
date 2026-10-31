@@ -4,8 +4,7 @@
   </NuxtLayout>
   <CookieNotice
     v-if="noticeVisible"
-    @accept="acceptAnalytics"
-    @decline="declineAnalytics" />
+    @acknowledge="closeNotice" />
 </template>
 
 <script setup lang="ts">
@@ -13,37 +12,28 @@ import { onMounted, ref } from 'vue'
 
 import { NuxtLayout, NuxtPage } from '#components'
 import {
-  readAnalyticsConsent,
-  writeAnalyticsConsent,
-} from '#layers/core/app/analytics/analyticsConsent'
+  acknowledgeCookieNotice,
+  isCookieNoticeAcknowledged,
+} from '#layers/core/app/analytics/cookieNotice'
 import CookieNotice from '#layers/core/app/analytics/components/CookieNotice.vue'
 import { useYandexMetrica } from '#layers/core/app/analytics/useYandexMetrica'
 
 const metrica = useYandexMetrica()
 
-// The consent lives in the browser, so the notice is decided after hydration: the server-rendered
-// page is the same for everyone.
+// Metrica starts on every visit; the notice tells the visitor about it once. Both are decided after
+// hydration: the notice depends on the browser's storage, and the server-rendered page is the same
+// for everyone.
 const noticeVisible = ref(false)
 onMounted(() => {
   if (!metrica.enabled) {
     return
   }
-  const consent = readAnalyticsConsent()
-  if (consent === 'granted') {
-    metrica.start()
-  } else if (consent === undefined) {
-    noticeVisible.value = true
-  }
+  metrica.start()
+  noticeVisible.value = !isCookieNoticeAcknowledged()
 })
 
-const acceptAnalytics = (): void => {
-  writeAnalyticsConsent('granted')
-  noticeVisible.value = false
-  metrica.start()
-}
-
-const declineAnalytics = (): void => {
-  writeAnalyticsConsent('denied')
+const closeNotice = (): void => {
+  acknowledgeCookieNotice()
   noticeVisible.value = false
 }
 </script>

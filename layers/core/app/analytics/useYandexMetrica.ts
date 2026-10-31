@@ -12,15 +12,14 @@ declare global {
 }
 
 export type YandexMetrica = {
-  // A counter is configured and this is not development: the cookie notice is needed.
+  // A counter is configured and this is not development: analytics and the cookie notice are on.
   enabled: boolean
-  // Loads the counter; called only after the visitor accepted analytics.
+  // Loads the counter; the root app calls it once the page is hydrated.
   start: () => void
 }
 
 // Yandex Metrica, created by the root app. Off in development and until a counter id is set
-// (runtimeConfig.public.yandexMetricaId / NUXT_PUBLIC_YANDEX_METRICA_ID). Nothing is loaded until
-// `start`: the counter sets cookies, so it waits for the visitor's consent. Webvisor stays off: on a
+// (runtimeConfig.public.yandexMetricaId / NUXT_PUBLIC_YANDEX_METRICA_ID). Webvisor stays off: on a
 // health site session recordings would capture what people read about their condition.
 export const useYandexMetrica = (): YandexMetrica => {
   // Nuxt parses a numeric env value into a number, so read it with String(...).

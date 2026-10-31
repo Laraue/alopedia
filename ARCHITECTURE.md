@@ -16,7 +16,7 @@ layers/
       ui/components/             Shared UI, e.g. the medical disclaimer.
       public-shell/              Header, footer and their navigation.
       constants/                 Site name, tagline, the privacy policy's contact and date.
-      analytics/                 Yandex Metrica and the cookie consent (notice, stored answer).
+      analytics/                 Yandex Metrica and the cookie notice.
   content/                       Home, section and article pages.
     app/
       pages/                     Route integration: index, articles, [section], [section]/[slug].
@@ -80,8 +80,8 @@ Links to other sites open in a new tab with `nofollow`. Every medical article en
 
 ## Analytics
 
-Yandex Metrica runs only in production, only with a counter id
-(`runtimeConfig.public.yandexMetricaId`), and only after the visitor presses «Принять» in the cookie
-notice; the answer is kept in `localStorage`. The root `app.vue` decides this after hydration, so
-the server-rendered page is the same for everyone. Webvisor is off. The privacy policy at `/privacy`
-describes what is collected; update `privacyPolicyDate` when its text changes.
+Yandex Metrica runs only in production and only with a counter id
+(`runtimeConfig.public.yandexMetricaId`). The root `app.vue` starts it after hydration on every
+visit and shows the cookie notice until the visitor presses «Понятно» (remembered in
+`localStorage`), so the server-rendered page is the same for everyone. Webvisor is off. The privacy
+policy at `/privacy` describes what is collected; update `privacyPolicyDate` when its text changes.
