@@ -44,7 +44,8 @@ const sectionTitles = Object.fromEntries(
 const articles = latestArticles(home)
 
 useSeoMeta({
-  description: 'Все статьи об алопеции и выпадении волос: виды, лечение, жизнь с алопецией.',
+  description:
+    'Все статьи Алопедии об алопеции и выпадении волос: виды алопеции, лечение, выпадение волос у женщин и детей, жизнь с алопецией.',
   ogType: 'website',
   title: 'Все статьи',
 })

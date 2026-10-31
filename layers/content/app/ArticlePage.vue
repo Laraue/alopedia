@@ -95,6 +95,7 @@ useSchemaOrg([
     dateModified: updatedAt,
     datePublished: createdAt,
     headline: title,
+    image: '/og-image.png',
     keywords,
   }),
   defineBreadcrumb({

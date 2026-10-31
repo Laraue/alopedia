@@ -101,7 +101,7 @@ const date = new Intl.DateTimeFormat('ru-RU', { dateStyle: 'long', timeZone: 'UT
 )
 
 useSeoMeta({
-  description: `Какие данные собирает сайт ${siteName}, зачем и как управлять cookie.`,
+  description: `Какие данные собирает сайт ${siteName}: cookie и Яндекс Метрика, технические журналы. Зачем они нужны, кому передаются и как отказаться.`,
   title: 'Политика конфиденциальности',
 })
 </script>

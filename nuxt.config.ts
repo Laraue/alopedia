@@ -1,6 +1,6 @@
 import { defineNuxtConfig } from 'nuxt/config'
 
-import { siteName } from './layers/core/app/constants/site'
+import { contactEmail, siteName } from './layers/core/app/constants/site'
 
 // Public origin of the site (override with NUXT_PUBLIC_SITE_URL): canonical and sitemap URLs are
 // built from it.
@@ -12,6 +12,15 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: { lang: 'ru' },
+      // Icons in `public/`: SVG for current browsers, ICO for the rest, 120px for Yandex's search
+      // results, 180px for iOS home screens.
+      link: [
+        { href: '/favicon.svg', rel: 'icon', type: 'image/svg+xml' },
+        { href: '/favicon.ico', rel: 'icon', sizes: '32x32' },
+        { href: '/icon-120.png', rel: 'icon', sizes: '120x120', type: 'image/png' },
+        { href: '/apple-touch-icon.png', rel: 'apple-touch-icon' },
+      ],
+      meta: [{ content: '#23786b', name: 'theme-color' }],
     },
   },
 
@@ -36,6 +45,17 @@ export default defineNuxtConfig({
     imports: false,
   },
 
+  routeRules: {
+    // HTTPS only from now on (no preload: that can't be undone quickly), and no MIME sniffing.
+    '/**': {
+      headers: {
+        'Referrer-Policy': 'strict-origin-when-cross-origin',
+        'Strict-Transport-Security': 'max-age=31536000',
+        'X-Content-Type-Options': 'nosniff',
+      },
+    },
+  },
+
   runtimeConfig: {
     public: {
       // The Yandex Metrica counter (NUXT_PUBLIC_YANDEX_METRICA_ID); empty turns analytics off.
@@ -47,6 +67,8 @@ export default defineNuxtConfig({
   // with the WebSite and WebPage nodes).
   schemaOrg: {
     identity: {
+      email: contactEmail,
+      logo: `${siteUrl}/icon-512.png`,
       name: siteName,
       type: 'Organization',
       url: siteUrl,
