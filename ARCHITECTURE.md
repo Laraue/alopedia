@@ -15,7 +15,8 @@ layers/
       ui/styles/                 Design tokens (light and dark) and base styles.
       ui/components/             Shared UI, e.g. the medical disclaimer.
       public-shell/              Header, footer and their navigation.
-      constants/                 Site name and tagline.
+      constants/                 Site name, tagline, the privacy policy's operator and contact.
+      analytics/                 Yandex Metrica and the cookie consent (notice, stored answer).
   content/                       Home, section and article pages.
     app/
       pages/                     Route integration: index, articles, [section], [section]/[slug].
@@ -30,6 +31,9 @@ layers/
                                  Sections and articles for the sitemap.
     shared/                      Types shared by the server and the pages.
     content/                     The articles: <section>/index.md and <section>/<slug>.md.
+  site/app/                      The site's own pages that are not content.
+    pages/privacy.vue, sections/legal/
+                                 The privacy policy.
 server/routes/robots.txt.ts      robots.txt with the sitemap address.
 ```
 
@@ -73,3 +77,11 @@ Links to other sites open in a new tab with `nofollow`. Every medical article en
 - `nuxt-schema-org`: Organization and WebSite everywhere, CollectionPage for sections, Article (and
   MedicalWebPage for medical pages) with BreadcrumbList for articles.
 - Set `NUXT_PUBLIC_SITE_URL` to the production origin; canonical, sitemap and robots.txt use it.
+
+## Analytics
+
+Yandex Metrica runs only in production, only with a counter id
+(`runtimeConfig.public.yandexMetricaId`), and only after the visitor presses «Принять» in the cookie
+notice; the answer is kept in `localStorage`. The root `app.vue` decides this after hydration, so
+the server-rendered page is the same for everyone. Webvisor is off. The privacy policy at `/privacy`
+describes what is collected; update `privacyPolicyDate` when its text changes.

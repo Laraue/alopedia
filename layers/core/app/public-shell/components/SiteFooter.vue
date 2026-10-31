@@ -21,7 +21,10 @@
         Материалы сайта носят информационный характер и не являются медицинской консультацией.
         Диагноз и лечение назначает врач.
       </p>
-      <p class="copyright">© {{ year }} {{ siteName }}</p>
+      <p class="copyright">
+        © {{ year }} {{ siteName }} ·
+        <NuxtLink to="/privacy">Политика конфиденциальности</NuxtLink>
+      </p>
     </div>
   </footer>
 </template>
@@ -86,5 +89,10 @@ const year = new Date().getFullYear()
 
 .copyright {
   margin-top: var(--space-3);
+}
+
+.copyright a {
+  color: var(--color-footer-text);
+  text-underline-offset: 3px;
 }
 </style>

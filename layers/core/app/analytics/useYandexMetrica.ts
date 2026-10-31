@@ -1,36 +1,62 @@
-import { useHead, useRouter, useRuntimeConfig } from '#app'
+import { useRouter, useRuntimeConfig } from '#app'
+
+type Ym = ((id: number, method: string, ...args: unknown[]) => void) & {
+  a?: unknown[][]
+  l?: number
+}
 
 declare global {
   interface Window {
-    ym?: (id: number, method: string, ...args: unknown[]) => void
+    ym?: Ym
   }
 }
 
-// The counter's own loader (from the Metrica settings page). Webvisor stays off: on a health site
-// session recordings would capture what people read about their condition.
-const loader = (id: number): string =>
-  '(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};' +
-  'm[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}' +
-  'k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})' +
-  '(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");' +
-  `ym(${id},"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:false});`
+export type YandexMetrica = {
+  // A counter is configured and this is not development: the cookie notice is needed.
+  enabled: boolean
+  // Loads the counter; called only after the visitor accepted analytics.
+  start: () => void
+}
 
-// Yandex Metrica, started by the root app. Off in development and until a counter id is set
-// (runtimeConfig.public.yandexMetricaId / NUXT_PUBLIC_YANDEX_METRICA_ID). The loader counts the
-// first page; moves between pages without a reload are sent as hits.
-export const useYandexMetrica = (): void => {
+// Yandex Metrica, created by the root app. Off in development and until a counter id is set
+// (runtimeConfig.public.yandexMetricaId / NUXT_PUBLIC_YANDEX_METRICA_ID). Nothing is loaded until
+// `start`: the counter sets cookies, so it waits for the visitor's consent. Webvisor stays off: on a
+// health site session recordings would capture what people read about their condition.
+export const useYandexMetrica = (): YandexMetrica => {
   // Nuxt parses a numeric env value into a number, so read it with String(...).
   const id = Number(String(useRuntimeConfig().public.yandexMetricaId))
-  if (import.meta.dev || !Number.isInteger(id) || id <= 0) {
-    return
-  }
+  const enabled = !import.meta.dev && Number.isInteger(id) && id > 0
+  const router = useRouter()
+  let started = false
 
-  useHead({ script: [{ innerHTML: loader(id), key: 'yandex-metrica' }] })
+  const start = (): void => {
+    if (!enabled || started || !import.meta.client) {
+      return
+    }
+    started = true
 
-  if (import.meta.client) {
-    useRouter().afterEach((to, from) => {
-      // The very first navigation (from the router's start location) is the page the loader counted.
-      if (from.matched.length === 0 || to.fullPath === from.fullPath) {
+    // The counter's loader, as on Metrica's settings page: calls queue up until tag.js arrives.
+    const queue: unknown[][] = []
+    const ym: Ym = (...args) => {
+      queue.push(args)
+    }
+    ym.a = queue
+    ym.l = Date.now()
+    window.ym = window.ym ?? ym
+    const script = document.createElement('script')
+    script.async = true
+    script.src = 'https://mc.yandex.ru/metrika/tag.js'
+    document.head.append(script)
+    window.ym(id, 'init', {
+      accurateTrackBounce: true,
+      clickmap: true,
+      trackLinks: true,
+      webvisor: false,
+    })
+
+    // `init` counts the current page; later moves between pages without a reload are hits.
+    router.afterEach((to, from) => {
+      if (to.fullPath === from.fullPath) {
         return
       }
       window.ym?.(id, 'hit', new URL(to.fullPath, window.location.origin).href, {
@@ -39,4 +65,6 @@ export const useYandexMetrica = (): void => {
       })
     })
   }
+
+  return { enabled, start }
 }
