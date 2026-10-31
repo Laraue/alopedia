@@ -36,6 +36,13 @@ export default defineNuxtConfig({
     imports: false,
   },
 
+  runtimeConfig: {
+    public: {
+      // The Yandex Metrica counter (NUXT_PUBLIC_YANDEX_METRICA_ID); empty turns analytics off.
+      yandexMetricaId: '',
+    },
+  },
+
   // The organization behind the site, for every page's structured data (nuxt-schema-org adds it
   // with the WebSite and WebPage nodes).
   schemaOrg: {
