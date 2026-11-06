@@ -86,6 +86,8 @@ jobs:
             set -e
             cd /home/laraue && docker compose build alopedia
             docker compose up -d --force-recreate alopedia
+            docker image prune -f || true
+            docker builder prune -f --filter until=168h || true
 
       - name: Notify deploy finished
         if: success()
