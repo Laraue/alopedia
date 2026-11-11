@@ -1,6 +1,7 @@
 import { Marked } from 'marked'
 
 import type { ContentHeading } from '../../shared/Content.types'
+import { renderIllustration } from './illustrations'
 
 const escapeHtml = (value: string): string =>
   value
@@ -32,11 +33,25 @@ const slugify = (value: string): string =>
 // The articles are our own content, so the HTML is not sanitized. Second and third level headings
 // get an id (for the table of contents and links to a section) and are returned alongside the HTML.
 // Links to other sites (the sources) open in a new tab and pass no ranking.
+// A line `::illustration[id]` inserts one of the drawn illustrations (see illustrations.ts).
 export const renderMarkdown = (body: string): { headings: ContentHeading[]; html: string } => {
   const headings: ContentHeading[] = []
   const usedIds = new Map<string, number>()
 
   const marked = new Marked({
+    extensions: [
+      {
+        level: 'block',
+        name: 'illustration',
+        renderer: (token) => renderIllustration(String(token.id)),
+        start: (source) => /^::illustration\[/m.exec(source)?.index,
+        tokenizer: (source) => {
+          const match = /^::illustration\[([a-z\d-]+)\][ \t]*(?:\n+|$)/.exec(source)
+
+          return match ? { id: match[1], raw: match[0], type: 'illustration' } : undefined
+        },
+      },
+    ],
     gfm: true,
     renderer: {
       heading({ depth, tokens }) {

@@ -121,6 +121,68 @@ const openInternalLink = async (event: MouseEvent): Promise<void> => {
   margin: var(--space-6) 0;
 }
 
+/* Drawn illustrations (server/content/illustrations.ts). The drawings have a white background, so
+   the card stays white in the dark theme too. */
+.prose :deep(.illustration) {
+  margin: var(--space-6) 0 var(--space-8);
+}
+
+.prose :deep(.illustration-frames) {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  color: #2b2925;
+  display: grid;
+  gap: var(--space-4) var(--space-3);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: var(--space-4);
+}
+
+.prose :deep(.illustration-frame) {
+  align-content: start;
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+  text-align: center;
+}
+
+.prose :deep(.illustration-frame picture) {
+  display: block;
+}
+
+.prose :deep(.illustration-frame img) {
+  border-radius: 0;
+  margin: 0 0 var(--space-1);
+  width: 100%;
+}
+
+.prose :deep(.illustration-label) {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.3;
+}
+
+.prose :deep(.illustration-note) {
+  color: #6b665d;
+  font-size: var(--font-size-sm);
+  line-height: 1.35;
+}
+
+.prose :deep(.illustration figcaption) {
+  color: var(--color-muted);
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+  margin-top: var(--space-3);
+}
+
+@media (max-width: 36rem) {
+  .prose :deep(.illustration-frames) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .prose :deep(hr) {
   border: 0;
   border-top: 1px solid var(--color-divider);
