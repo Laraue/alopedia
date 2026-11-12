@@ -16,6 +16,8 @@ interface IllustrationFrame {
 
 interface Illustration {
   caption: string
+  /** Frames per row on wide screens (default 4); phones always show two. */
+  columns?: number
   frames: IllustrationFrame[]
   height: number
   width: number
@@ -54,6 +56,63 @@ const illustrations: Record<string, Illustration> = {
     height: 600,
     width: 600,
   },
+  'norwood-scale': {
+    caption:
+      'Шкала Норвуда — стадии андрогенетической алопеции у мужчин. Слева на каждом рисунке вид сбоку, справа — сверху.',
+    columns: 2,
+    frames: [
+      {
+        alt: 'Стадия 1: полная линия роста волос, вид сбоку и сверху',
+        file: 'stage-1',
+        label: 'Стадия 1',
+        note: 'Линия роста волос почти не изменилась',
+      },
+      {
+        alt: 'Стадия 2: небольшие залысины у висков',
+        file: 'stage-2',
+        label: 'Стадия 2',
+        note: 'Небольшие залысины у висков',
+      },
+      {
+        alt: 'Стадия 3: глубокие залысины у висков',
+        file: 'stage-3',
+        label: 'Стадия 3',
+        note: 'Глубокие залысины',
+      },
+      {
+        alt: 'Стадия 3 vertex: глубокие залысины и поредение на макушке',
+        file: 'stage-3-vertex',
+        label: 'Стадия 3 vertex',
+        note: 'Залысины и поредение на макушке',
+      },
+      {
+        alt: 'Стадия 4: залысины глубже, на макушке проплешина, между ними полоса волос',
+        file: 'stage-4',
+        label: 'Стадия 4',
+        note: 'Проплешина на макушке, между зонами полоса волос',
+      },
+      {
+        alt: 'Стадия 5: полоса волос между лбом и макушкой узкая и редкая',
+        file: 'stage-5',
+        label: 'Стадия 5',
+        note: 'Полоса волос сужается и редеет',
+      },
+      {
+        alt: 'Стадия 6: лоб и макушка слились в одну зону облысения',
+        file: 'stage-6',
+        label: 'Стадия 6',
+        note: 'Лоб и макушка слились',
+      },
+      {
+        alt: 'Стадия 7: волосы остались подковой по бокам и на затылке',
+        file: 'stage-7',
+        label: 'Стадия 7',
+        note: 'Волосы только подковой по бокам и на затылке',
+      },
+    ],
+    height: 250,
+    width: 500,
+  },
 }
 
 const escapeHtml = (value: string): string =>
@@ -86,7 +145,7 @@ export const renderIllustration = (id: string): string => {
     .join('')
 
   return (
-    `<figure class="illustration"><ol class="illustration-frames">${frames}</ol>` +
+    `<figure class="illustration"><ol class="illustration-frames" style="--illustration-columns: ${illustration.columns ?? 4}">${frames}</ol>` +
     `<figcaption>${escapeHtml(illustration.caption)}</figcaption></figure>\n`
   )
 }

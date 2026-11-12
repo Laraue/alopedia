@@ -134,7 +134,7 @@ const openInternalLink = async (event: MouseEvent): Promise<void> => {
   color: #2b2925;
   display: grid;
   gap: var(--space-4) var(--space-3);
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--illustration-columns, 4), minmax(0, 1fr));
   list-style: none;
   margin: 0;
   padding: var(--space-4);
