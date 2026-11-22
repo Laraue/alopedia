@@ -181,6 +181,11 @@ const openInternalLink = async (event: MouseEvent): Promise<void> => {
   .prose :deep(.illustration-frames) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  /* A single frame is one wide picture rather than a row of frames: it keeps the whole width. */
+  .prose :deep(.illustration-frame:only-child) {
+    grid-column: 1 / -1;
+  }
 }
 
 .prose :deep(hr) {

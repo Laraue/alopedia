@@ -16,7 +16,7 @@ interface IllustrationFrame {
 
 interface Illustration {
   caption: string
-  /** Frames per row on wide screens (default 4); phones always show two. */
+  /** Frames per row on wide screens (default 4); phones show two, or one for a single frame. */
   columns?: number
   frames: IllustrationFrame[]
   height: number
