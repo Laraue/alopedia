@@ -54,8 +54,8 @@ const illustrations: Record<string, Illustration> = {
         note: 'Волосы выпали на голове и на теле, включая брови и ресницы',
       },
     ],
-    height: 800,
-    width: 800,
+    height: 384,
+    width: 636,
   },
   'alopecia-areata-patch': {
     caption:
